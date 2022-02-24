@@ -1,12 +1,30 @@
 from model.crm import crm
 from view import terminal as view
 
+def add_customer():
+    while True:
+        name = view.get_input("Type in your Name")
+        if name == "":
+            print("Please enter your Name.")
+        else:
+            break
+    while True:
+        email = view.get_input("Type in your Email")
+        if "@" in email and "." in email:
+            break
+        else:
+            print("Enter a valid email please(exampleMail@something.domain)")
+    while True:
+        subscribed = view.get_input("Do you want a subscription? type in 0 for no and 1 for yes")
+        if subscribed in ["0", "1"]:
+            break
+        else:
+            print("0 or 1 please.")
+    crm.save_data(name, email, subscribed)
+
+    # model.crm.saveData([name, email, subscribed])
 
 def list_customers():
-    view.print_error_message("Not implemented yet.")
-
-
-def add_customer():
     view.print_error_message("Not implemented yet.")
 
 
@@ -24,9 +42,11 @@ def get_subscribed_emails():
 
 def run_operation(option):
     if option == 1:
-        list_customers()
-    elif option == 2:
         add_customer()
+
+    elif option == 2:
+        list_customers()
+
     elif option == 3:
         update_customer()
     elif option == 4:

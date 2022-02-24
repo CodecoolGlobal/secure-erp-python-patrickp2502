@@ -1,6 +1,8 @@
+import logging
 from view import terminal as view
 from controller import crm_controller, sales_controller, hr_controller
-
+import logging
+logging.basicConfig(level = logging.DEBUG)
 
 def load_module(option):
     if option == 1:
@@ -30,8 +32,10 @@ def menu():
         try:
             option = view.get_input("Select module")
             load_module(int(option))
+            logging.debug(f"option input {option}")
         except KeyError:
             view.print_error_message("There is no such option!")
         except ValueError:
             view.print_error_message("Please enter a number!")
     view.print_message("Good-bye!")
+
