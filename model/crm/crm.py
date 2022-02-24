@@ -25,4 +25,3 @@ def save_data(name, email, subscribed):
     data_to_save = [id, name, email, subscribed]
     all_data.append(data_to_save)
     data_manager.write_table_to_file(DATAFILE, all_data)
-    
