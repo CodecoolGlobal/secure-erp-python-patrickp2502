@@ -1,5 +1,3 @@
-from itertools import product
-from pickletools import read_unicodestring1
 
 
 def print_menu(title, list_options):

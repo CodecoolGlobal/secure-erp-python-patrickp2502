@@ -61,8 +61,8 @@ def run_operation(option):
 
 def display_menu():
     options = ["Back to main menu",
-               "List customers",
                "Add new customer",
+               "List customers",
                "Update customer",
                "Remove customer",
                "Subscribed customer emails"]
