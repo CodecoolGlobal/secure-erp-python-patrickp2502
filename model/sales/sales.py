@@ -45,6 +45,7 @@ def delete_data(selling_id):
             del all_data[all_data.index(purchase)]
     data_manager.write_table_to_file(DATAFILE, all_data)
 
+
 def get_biggest_revenue():
     all_data = data_manager.read_table_from_file(DATAFILE)
     prices = []
@@ -61,3 +62,41 @@ def get_biggest_revenue():
     for purchase in all_data:
         if purchase[3] == real_biggest:
             print(purchase)
+
+
+def check_in_timespan(time_span_beginn, time_span_end):
+    all_data = data_manager.read_table_from_file(DATAFILE)
+    dates = [] 
+    for transaction in all_data:
+        dates.append(transaction[4])
+    dates.append(time_span_beginn)
+    dates.append(time_span_end)
+    sorted_dates = sorted(dates)
+    start = sorted_dates.index(time_span_beginn) + 1
+    end = sorted_dates.index(time_span_end)
+    print(f"THE AMOUNT OF TRANSACTIONS BETWEEN THE {time_span_beginn} AND THE {time_span_end}, WERE: {end - start}")
+
+
+def check_in_timespan_sum_of_transactions(start, end):
+    all_data = data_manager.read_table_from_file(DATAFILE)
+    dates = [] 
+    revenue = []
+    for transaction in all_data:
+        dates.append(transaction[4])
+        revenue.append(transaction[3])
+
+    cache_dates = dates[:]
+    relevant_revenues = []
+    dates.append(start)
+    dates.append(end)
+    sorted_dates = sorted(dates)
+    start_date = sorted_dates.index(start) + 1
+    end_date = sorted_dates.index(end)
+    relevant_dates =  sorted_dates[start_date:end_date]
+    for date in relevant_dates:
+        relevant_revenues.append(revenue[cache_dates.index(date)])
+    sum_relevant_revenues = []
+    for number in relevant_revenues:
+        sum_relevant_revenues.append(float(number))
+    end_sum = sum(sum_relevant_revenues)
+    print("The sum of all pricess of transactions in this timespan are:", end_sum)
