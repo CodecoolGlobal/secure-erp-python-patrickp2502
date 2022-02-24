@@ -1,17 +1,93 @@
+from operator import truediv
+from signal import pthread_sigmask
+from webbrowser import get
 from model.hr import hr
 from view import terminal as view
 
 
 def list_employees():
-    view.print_error_message("Not implemented yet.")
+    list_employees = hr.get_hr_data()
+    view.print_table(list_employees)
+
+
+
+def get_valid_name():
+    while True:
+        name = view.get_input("Enter Name: ")
+        if len(name) > 0:
+            break
+        view.print_error_message("Please provide a name")
+    return name
+
+
+def get_valid_date():    
+    while True:
+        try:
+            valid_birth_date = view.get_input("Birth date (YYYY-MM-DD): ")
+            if is_valid_birthdate(valid_birth_date):
+                return valid_birth_date
+            else:
+                raise ValueError
+        except ValueError:
+            view.print_error_message("Please provide a datum Format YYYY-MM-DD")
+            continue
+
+
+def get_valid_department():
+    while True:
+        valid_department = view.get_input("Enter department: ")
+        if valid_department != None:
+            break
+        view.print_error_message("Please provide department: ")
+    return valid_department
+
+
+def get_valid_clearance_level():
+    while True:
+        try:
+            clearance_level_str = view.get_input("Clearance level from 0 lowest to 7 highest:")
+            valid_clearance_level = int(clearance_level_str)
+            if hr.CLEARANCE_LEVEL_LOW <= valid_clearance_level <= hr.CLEARANCE_LEVEL_HIGH:
+                break 
+        except ValueError:
+            view.print_error_message("Please provide a number between 1 and 7!")
+    return valid_clearance_level
+
+
+def is_valid_birthdate(birth_date):
+    return int(birth_date[:4]) > 0 and 1 <= int(birth_date[5:7]) <= 12 and \
+                    1 <= int(birth_date[8:10]) <= 31 and birth_date[4] == "-" and \
+                    birth_date[7] == "-"
 
 
 def add_employee():
-    view.print_error_message("Not implemented yet.")
+    view.print_message("Please provide information of new employee")
+    name = get_valid_name()
+    birth_date = get_valid_date()
+    department = get_valid_department()
+    clearance_level = get_valid_clearance_level()
+    hr.add_data(name, birth_date, department, clearance_level)
 
 
 def update_employee():
-    view.print_error_message("Not implemented yet.")
+    view.print_message("Update User Data")
+    user_data = get_valid_user_data()
+    
+
+
+
+def get_valid_user_data():
+    while True:
+        try:
+            user_id = view.get_input("User-ID: ")
+            user_data = hr.get_user_data(user_id)
+            return user_data
+        except IndexError:
+            view.print_error_message(f"Couldn't find user ID: {user_id}")
+            continue
+    
+
+
 
 
 def delete_employee():
