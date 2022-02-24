@@ -2,6 +2,7 @@ from itertools import product
 from pickletools import read_unicodestring1
 
 
+
 def print_menu(title, list_options):
     """Prints options in standard menu format like this:
 
@@ -62,11 +63,21 @@ def print_table(table):
     Args:
         table: list of lists - the table to print out
     """
-    #TODO skalierbar auf x spalten
+    print(table) 
 
-    print(f"id".center(8) + "|" + f"product".center(12) + "|" + f"type".center(10) + "|")
-    for row in table:
-        print(f"{row[0]}".center(8) + "|" + f"{row[1]}".center(12) + "|" + f"{row[2]}".center(10) + "|")
+
+
+
+    # header_row_string =  "|".join([str(column).center(10) for column in table[0]]) + "|"
+    # print(header_row_string)
+    
+    # for row in table:
+    #     row_string = "|" + 
+    #     pass
+
+    # print(f"id".center(8) + "|" + f"product".center(12) + "|" + f"type".center(10) + "|")
+    # for row in table:
+    #     print(f"{row[0]}".center(8) + "|" + f"{row[1]}".center(12) + "|" + f"{row[2]}".center(10) + "|")
         
 
     
@@ -102,3 +113,12 @@ def print_error_message(message):
         message: str - the error message
     """
     print(message)
+
+
+if __name__ == "__main__":
+    
+    test_table = [["ASBDABSDB", "IDEED", "BLALALALALALAL", "noice"],
+                    ["ASBDABSDB", "IDasdasdasdEED", "BLALALALALALALasdasdasdas", "noice"],
+                    ["ASBDABSDB", "ID11111EED", "BLALALAL11111ALALAL", "nadsasdasdasoice"]]
+
+    print_table(test_table)
