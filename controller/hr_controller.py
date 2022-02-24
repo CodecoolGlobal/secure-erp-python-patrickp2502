@@ -3,7 +3,8 @@ from signal import pthread_sigmask
 from webbrowser import get
 from model.hr import hr
 from view import terminal as view
-
+import logging
+logging.basicConfig(level=logging.DEBUG)
 
 def list_employees():
     list_employees = hr.get_hr_data()
@@ -51,7 +52,8 @@ def get_valid_clearance_level():
                 break 
         except ValueError:
             view.print_error_message("Please provide a number between 1 and 7!")
-    return valid_clearance_level
+    valid_clearance_level_string = str(valid_clearance_level)
+    return valid_clearance_level_string
 
 
 def is_valid_birthdate(birth_date):
@@ -68,18 +70,28 @@ def add_employee():
     clearance_level = get_valid_clearance_level()
     hr.add_data(name, birth_date, department, clearance_level)
 
-
 def update_employee():
     view.print_message("Update User Data")
-    user_data = get_valid_user_data()
     
+    user_data = get_valid_user_data_by_id()
+    view.print_table(user_data)
+    new_name = get_valid_name()
+    new_birthdate = get_valid_date()
+    new_department = get_valid_department()
+    new_clearance_level = get_valid_clearance_level()
+
+    user_data[1] = new_name
+    user_data[2] = new_birthdate
+    user_data[3] = new_department
+    user_data[4] = new_clearance_level
+    hr.update_data(user_data)
 
 
-
-def get_valid_user_data():
+def get_valid_user_data_by_id():
     while True:
         try:
             user_id = view.get_input("User-ID: ")
+            logging.debug(f"userid  input {user_id}")
             user_data = hr.get_user_data(user_id)
             return user_data
         except IndexError:
@@ -88,14 +100,15 @@ def get_valid_user_data():
     
 
 
-
-
 def delete_employee():
-    view.print_error_message("Not implemented yet.")
-
+    view.print_message("Delete a Employee")
+    user_data = get_valid_user_data_by_id()
+    view.print_table(user_data)
+    hr.delete_employee_data(user_data)
+    
 
 def get_oldest_and_youngest():
-    view.print_error_message("Not implemented yet.")
+    age_tuple = hr.()
 
 
 def get_average_age():

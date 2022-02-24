@@ -146,18 +146,22 @@ def delete_transaction():
 
 def get_biggest_revenue_transaction():
     sales.get_biggest_revenue()
-    view.print_error_message("Not implemented yet.")
 
 
 def get_biggest_revenue_product():
-    view.print_error_message("Not implemented yet.")
+    print(sales.get_max_revenue_of_all_sales_with_one_product())
 
 
 def count_transactions_between():
-    view.print_error_message("Not implemented yet.")
+    start = input("Enter Start date (YYYY-MM-DD):")
+    end = input("Enter End date (YYYY-MM-DD):")
+    sales.check_in_timespan(start, end)
 
 
 def sum_transactions_between():
+    start = input("Enter Start date (YYYY-MM-DD):")
+    end = input("Enter End date (YYYY-MM-DD):")
+    sales.check_in_timespan_sum_of_transactions(start, end)
     view.print_error_message("Not implemented yet.")
 
 

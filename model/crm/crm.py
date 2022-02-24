@@ -25,3 +25,12 @@ def save_data(name, email, subscribed):
     data_to_save = [id, name, email, subscribed]
     all_data.append(data_to_save)
     data_manager.write_table_to_file(DATAFILE, all_data)
+
+def update_data(id, name, email, subscribed):
+    all_data = data_manager.read_table_from_file(DATAFILE)
+    for customer in all_data:
+        if id == customer[0]:
+            data_to_update_with = [id, name, email, subscribed]
+            all_data[all_data.index(customer)] = data_to_update_with
+            break
+    data_manager.write_table_to_file(DATAFILE, all_data)

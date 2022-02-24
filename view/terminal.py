@@ -61,7 +61,7 @@ def print_table(table):
     Args:
         table: list of lists - the table to print out
     """
-    print(table) 
+    print(table)
 
 
 
