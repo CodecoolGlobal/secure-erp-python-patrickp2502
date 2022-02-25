@@ -34,3 +34,18 @@ def update_data(id, name, email, subscribed):
             all_data[all_data.index(customer)] = data_to_update_with
             break
     data_manager.write_table_to_file(DATAFILE, all_data)
+
+def delete_data(id):
+    all_data = data_manager.read_table_from_file(DATAFILE)
+    for customer in all_data:
+        if id == customer[0]:
+            del all_data[all_data.index(customer)]
+    data_manager.write_table_to_file(DATAFILE, all_data)
+
+def pull_subscribed_email_adresses():
+    mail_adresses_subscribed = []
+    all_data = data_manager.read_table_from_file(DATAFILE)
+    for customer in all_data:
+        if customer[-1] == "1":
+            mail_adresses_subscribed.append(customer[2])
+    print("THE MAIL ADRESSES OF SUBSCRIBED CUSTOMERS ARE:", " ".join(mail_adresses_subscribed))

@@ -1,3 +1,4 @@
+from unicodedata import name
 from model.crm import crm
 from view import terminal as view
 
@@ -30,81 +31,46 @@ def list_customers():
 
 def update_customer():
     while True:
-        id = input("Which purchase yould you like to change?")
+        id = input("What is the customers id?")
         break_out_of_for_loop = False
         for customer in crm.get_user_data()[0]:
-            print(purchase)
-            if selling_id == purchase[0]:
+            print(customer)
+            if id == customer[0]:
                 break_out_of_for_loop = True
                 break
         if break_out_of_for_loop:
             break
     while True:
-        customer_id = view.get_input("Type in the ID of the customer who bought something.")
-        if customer_id == "":
-            print("Please enter a customers ID.")
+        name = view.get_input("Type in your Name")
+        if name == "":
+            print("Please enter your Name.")
         else:
             break
     while True:
-        product = view.get_input("What was bought?")
-        if product.isalnum():
+        email = view.get_input("Type in your Email")
+        if "@" in email and "." in email:
             break
         else:
-            print("Please enter the Product name.(letters and numbers possible)")
+            print("Enter a valid email please(exampleMail@something.domain)")
     while True:
-        price = view.get_input("What was the selling price?")
-        try:
-            float(price)
+        subscribed = view.get_input("Do you want a subscription? type in 0 for no and 1 for yes")
+        if subscribed in ["0", "1"]:
             break
-        except:
-            print("Please enter a float type.")
-    while True:
-        day = view.get_input("What was the selling day?")
-        if len(day) == 2:
-            if day.isnumeric():
-                if int(day) >= 1 and int(day) <= 31:
-                    break
-                else:
-                    print("Input has to be a valid date.")
-            else:
-                print("Input has to be numbers.")
         else:
-            print("2 numbers input only.")
-    while True:
-        month = view.get_input("What was the selling month?")
-        if len(month) == 2:
-            if month.isnumeric():
-                if int(month) >= 1 and int(month) <= 12:
-                    break
-                else:
-                    print("Input has to be a valid month between 1 and 12.")
-            else:
-                print("Input has to be numbers.")
-        else:
-            print("2 numbers input only.")
-    while True:
-        year = view.get_input("What was the selling year?")
-        if len(year) == 4:
-            if year.isnumeric():
-                if int(year) >= 1800 and int(year) <= 3000:
-                    break
-                else:
-                    print("Input has to be a valid year between 1800 and 3000.")
-            else:
-                print("Input has to be numbers.")
-        else:
-            print("4 numbers input only.")
-    date = year + "-" + month + "-" + day
-    crm.update_data(id, customer_id, product, price, date)
-    view.print_error_message("Not implemented yet.")
+            print("0 or 1 please.")
+    crm.update_data(id, name, email, subscribed)
 
 
 def delete_customer():
-    view.print_error_message("Not implemented yet.")
+    id = view.get_input("Which customer do you want to delete?")
+    for customer in crm.get_user_data()[0]:
+        print(customer)
+        if id == customer[0]:
+            crm.delete_data(id)
 
 
 def get_subscribed_emails():
-    view.print_error_message("Not implemented yet.")
+    crm.pull_subscribed_email_adresses()
 
 
 def run_operation(option):

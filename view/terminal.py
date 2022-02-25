@@ -1,6 +1,5 @@
 
 
-
 def print_menu(title, list_options):
     """Prints options in standard menu format like this:
 
@@ -55,13 +54,28 @@ def print_general_results(result, label):
 # |--------|------------|----------|
 # |   1    | Sidewinder | missile  |
 # \-----------------------------------/
-def print_table(table):
+def print_table(table, header):
     """Prints tabular data like above.
 
     Args:
         table: list of lists - the table to print out
     """
-    print(table)
+    # lookingGood = ""
+    # line = "{:>9} |{:>6}\n"
+    # for item in table:
+    #     lookingGood += line.format(item)
+    # yeess = "-----------------\nitem name | count\n-----------------\n" + lookingGood + "-----------------"
+    # print(yeess)
+    all_print = ""
+    line = "| {} " * len(header)
+    print(line)
+    # all_print += line.format(header)
+    for column in table:
+        all_print += line.format(x for x in column)
+    all_print += "|"
+    print(all_print)
+
+
 
 
 

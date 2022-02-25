@@ -45,6 +45,7 @@ def delete_data(selling_id):
             del all_data[all_data.index(purchase)]
     data_manager.write_table_to_file(DATAFILE, all_data)
 
+
 def get_biggest_revenue():
     all_data = data_manager.read_table_from_file(DATAFILE)
     prices = []

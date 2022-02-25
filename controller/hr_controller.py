@@ -1,14 +1,9 @@
-from operator import truediv
-from signal import pthread_sigmask
-from webbrowser import get
 from model.hr import hr
 from view import terminal as view
-import logging
-logging.basicConfig(level=logging.DEBUG)
 
 def list_employees():
     list_employees = hr.get_hr_data()
-    view.print_table(list_employees)
+    view.print_table(list_employees, hr.HEADERS)
 
 
 
@@ -74,7 +69,7 @@ def update_employee():
     view.print_message("Update User Data")
     
     user_data = get_valid_user_data_by_id()
-    view.print_table(user_data)
+    # view.print_table(user_data)
     new_name = get_valid_name()
     new_birthdate = get_valid_date()
     new_department = get_valid_department()
@@ -91,7 +86,6 @@ def get_valid_user_data_by_id():
     while True:
         try:
             user_id = view.get_input("User-ID: ")
-            logging.debug(f"userid  input {user_id}")
             user_data = hr.get_user_data(user_id)
             return user_data
         except IndexError:
@@ -103,28 +97,31 @@ def get_valid_user_data_by_id():
 def delete_employee():
     view.print_message("Delete a Employee")
     user_data = get_valid_user_data_by_id()
-    view.print_table(user_data)
+    # view.print_table(user_data)
     hr.delete_employee_data(user_data)
     
 
 def get_oldest_and_youngest():
-    age_tuple = hr.()
+    print(hr.get_names_of_oldest_and_youngest())
 
 
 def get_average_age():
-    view.print_error_message("Not implemented yet.")
+    todays_date = input("What's todays date(YYYY-MM-DD)?")
+    print(hr.average_age_calculator(todays_date))
 
 
 def next_birthdays():
-    view.print_error_message("Not implemented yet.")
+    date = input("Enter a date to calculate the birthdays around this date(YYYY-MM-DD):")
+    print(hr.get_next_birthdays(date))
 
 
 def count_employees_with_clearance():
-    view.print_error_message("Not implemented yet.")
+    clearance = input("Which clearance level are you filtering for?")
+    print(hr.check_for_clearance(clearance))
 
 
 def count_employees_per_department():
-    view.print_error_message("Not implemented yet.")
+    print(hr.show_department_employees())
 
 
 def run_operation(option):
