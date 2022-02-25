@@ -54,17 +54,42 @@ def print_general_results(result, label):
 # |--------|------------|----------|
 # |   1    | Sidewinder | missile  |
 # \-----------------------------------/
-def print_table(table):
+def print_table(table, header):
     """Prints tabular data like above.
 
     Args:
         table: list of lists - the table to print out
     """
-    #TODO skalierbar auf x spalten
+    # lookingGood = ""
+    # line = "{:>9} |{:>6}\n"
+    # for item in table:
+    #     lookingGood += line.format(item)
+    # yeess = "-----------------\nitem name | count\n-----------------\n" + lookingGood + "-----------------"
+    # print(yeess)
+    all_print = ""
+    line = "| {} " * len(header)
+    print(line)
+    # all_print += line.format(header)
+    for column in table:
+        all_print += line.format(x for x in column)
+    all_print += "|"
+    print(all_print)
 
-    print(f"id".center(8) + "|" + f"product".center(12) + "|" + f"type".center(10) + "|")
-    for row in table:
-        print(f"{row[0]}".center(8) + "|" + f"{row[1]}".center(12) + "|" + f"{row[2]}".center(10) + "|")
+
+
+
+
+
+    # header_row_string =  "|".join([str(column).center(10) for column in table[0]]) + "|"
+    # print(header_row_string)
+    
+    # for row in table:
+    #     row_string = "|" + 
+    #     pass
+
+    # print(f"id".center(8) + "|" + f"product".center(12) + "|" + f"type".center(10) + "|")
+    # for row in table:
+    #     print(f"{row[0]}".center(8) + "|" + f"{row[1]}".center(12) + "|" + f"{row[2]}".center(10) + "|")
         
 
     
@@ -100,3 +125,12 @@ def print_error_message(message):
         message: str - the error message
     """
     print(message)
+
+
+if __name__ == "__main__":
+    
+    test_table = [["ASBDABSDB", "IDEED", "BLALALALALALAL", "noice"],
+                    ["ASBDABSDB", "IDasdasdasdEED", "BLALALALALALALasdasdasdas", "noice"],
+                    ["ASBDABSDB", "ID11111EED", "BLALALAL11111ALALAL", "nadsasdasdasoice"]]
+
+    print_table(test_table)

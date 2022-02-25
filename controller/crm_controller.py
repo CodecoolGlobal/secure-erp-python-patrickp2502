@@ -1,3 +1,4 @@
+from unicodedata import name
 from model.crm import crm
 from view import terminal as view
 
@@ -29,15 +30,47 @@ def list_customers():
 
 
 def update_customer():
-    view.print_error_message("Not implemented yet.")
+    while True:
+        id = input("What is the customers id?")
+        break_out_of_for_loop = False
+        for customer in crm.get_user_data()[0]:
+            print(customer)
+            if id == customer[0]:
+                break_out_of_for_loop = True
+                break
+        if break_out_of_for_loop:
+            break
+    while True:
+        name = view.get_input("Type in your Name")
+        if name == "":
+            print("Please enter your Name.")
+        else:
+            break
+    while True:
+        email = view.get_input("Type in your Email")
+        if "@" in email and "." in email:
+            break
+        else:
+            print("Enter a valid email please(exampleMail@something.domain)")
+    while True:
+        subscribed = view.get_input("Do you want a subscription? type in 0 for no and 1 for yes")
+        if subscribed in ["0", "1"]:
+            break
+        else:
+            print("0 or 1 please.")
+    crm.update_data(id, name, email, subscribed)
 
 
 def delete_customer():
-    view.print_error_message("Not implemented yet.")
+    id = view.get_input("Which customer do you want to delete?")
+    for customer in crm.get_user_data()[0]:
+        print(customer)
+        if id == customer[0]:
+            crm.delete_data(id)
 
 
 def get_subscribed_emails():
-    view.print_error_message("Not implemented yet.")
+    crm.pull_subscribed_email_adresses()
 
 
 def run_operation(option):
