@@ -1,4 +1,3 @@
-from unicodedata import name
 from model.crm import crm
 from view import terminal as view
 
@@ -26,7 +25,8 @@ def add_customer():
     # model.crm.saveData([name, email, subscribed])
 
 def list_customers():
-    view.print_error_message("Not implemented yet.")
+    all_customer_data, customer_data_header = crm.get_user_data()
+    view.print_table(all_customer_data, customer_data_header)
 
 
 def update_customer():

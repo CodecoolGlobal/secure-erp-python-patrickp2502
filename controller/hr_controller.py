@@ -102,7 +102,7 @@ def delete_employee():
     
 
 def get_oldest_and_youngest():
-    print(hr.get_names_of_oldest_and_youngest())
+    view.print_general_results((hr.get_names_of_oldest_and_youngest()), "oldest, younges")
 
 
 def get_average_age():

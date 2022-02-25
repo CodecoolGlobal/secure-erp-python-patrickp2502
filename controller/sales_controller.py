@@ -62,7 +62,7 @@ def add_transaction():
 
 
 def list_transactions():
-    view.print_table(sales.get_user_data())
+    view.print_table(sales.get_user_data(),sales.HEADERS)
     # view.print_error_message("Not implemented yet.")
 
 

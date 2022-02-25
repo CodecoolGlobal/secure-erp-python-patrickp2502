@@ -20,7 +20,7 @@ def get_user_data():
     # return
     all_data = data_manager.read_table_from_file(DATAFILE)
     # all_data = data_manager.read_table_from_file(DATAFILE)
-    return all_data, HEADERS
+    return all_data
 
 def save_data(customer_id, product, price, date):
     all_data = data_manager.read_table_from_file(DATAFILE)

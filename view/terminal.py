@@ -35,13 +35,13 @@ def print_general_results(result, label):
     lists/tuples (like "@label: \n  @item1; @item2"), and dictionaries
     (like "@label \n  @key1: @value1; @key2: @value2")
     """
-    if result.isinstance(float):
+    if isinstance(result, float):
         value = round(result, 2)
         print(f"{label}: {value}")
-    elif result.isinstance(list) or result.isinstance(tuple):
+    elif isinstance(result, list) or isinstance(result, tuple):
         value =  ";".join(result)
         print(f"{label}:\n {value}")
-    elif result.isinstance(dict):
+    elif isinstance(result, dict):
         value = ";".join([f"{key}: {value}" for key, value in result])
         print(f"{label} \n {value}")
 
@@ -60,21 +60,17 @@ def print_table(table, header):
     Args:
         table: list of lists - the table to print out
     """
-    # lookingGood = ""
-    # line = "{:>9} |{:>6}\n"
-    # for item in table:
-    #     lookingGood += line.format(item)
-    # yeess = "-----------------\nitem name | count\n-----------------\n" + lookingGood + "-----------------"
-    # print(yeess)
-    all_print = ""
-    line = "| {} " * len(header)
-    print(line)
-    # all_print += line.format(header)
-    for column in table:
-        all_print += line.format(x for x in column)
-    all_print += "|"
-    print(all_print)
-
+   
+    #TODO ADD VISUALS! Add flex column width
+    colum_length = max([len(data_cell) for row in table for data_cell in row]) + 4
+    
+    header_string = "|" + "|".join(["".join(header_data).center(colum_length) for header_data in header]) + "|"
+    print(header_string)
+    for row in table:
+        row_string = "|" + "|".join(["".join(row_data).center(colum_length) for row_data in row]) + "|"
+        print(row_string)
+    
+    
 
 
 
