@@ -121,7 +121,9 @@ def count_employees_with_clearance():
 
 
 def count_employees_per_department():
-    print(hr.show_department_employees())
+    departments_dict = hr.show_department_employees()
+    print(departments_dict)
+    # view.print_general_results(departments_dict, "The departments with employees:\n")
 
 
 def run_operation(option):

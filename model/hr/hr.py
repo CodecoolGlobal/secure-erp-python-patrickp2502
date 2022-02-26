@@ -30,7 +30,6 @@ def add_data(name: string, birth_date: string, department: string, clearance_lev
     clearance_level_string = clearance_level
     data_to_save = [id, name, birth_date, department, clearance_level_string]
     all_data.append(data_to_save)
-    print(all_data )
     data_manager.write_table_to_file(DATAFILE, all_data)
 
 

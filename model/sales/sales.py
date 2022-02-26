@@ -55,7 +55,7 @@ def get_biggest_revenue():
     max_float = max(float(number[3]) for number in all_data)
     for purchase in all_data:
         if purchase[3] == str(max_float):
-            print(purchase)
+            return purchase
 
 def get_max_revenue_of_all_sales_with_one_product():
     all_data = data_manager.read_table_from_file(DATAFILE)
@@ -73,7 +73,7 @@ def get_max_revenue_of_all_sales_with_one_product():
     # for product in products:
     #     productuess.add(product)
     for product in added_items:
-        prices_added.append([int(product[0]) * float(prices[products.index(product[1:])]), product[1:]])
+        prices_added.append([product[1:], int(product[0]) * float(prices[products.index(product[1:])])])
     check_set = set()
     for lst in prices_added:
         for item in lst:
@@ -94,7 +94,7 @@ def check_in_timespan(time_span_beginn, time_span_end):
     sorted_dates = sorted(dates)
     start = sorted_dates.index(time_span_beginn) + 1
     end = sorted_dates.index(time_span_end)
-    print(f"THE AMOUNT OF TRANSACTIONS BETWEEN THE {time_span_beginn} AND THE {time_span_end}, WERE: {end - start}")
+    print(f"The amount of transactions between the {time_span_beginn} and the {time_span_end} were: {end - start}")
 
 
 def check_in_timespan_sum_of_transactions(start, end):
@@ -119,7 +119,7 @@ def check_in_timespan_sum_of_transactions(start, end):
     for number in relevant_revenues:
         sum_relevant_revenues.append(float(number))
     end_sum = sum(sum_relevant_revenues)
-    print(end_sum)
+    print(f"The sum of all transactions from {start} to {end} is:" , end_sum)
 
 
 

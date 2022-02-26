@@ -70,8 +70,7 @@ def update_transaction():
     while True:
         selling_id = input("Which purchase yould you like to change?")
         break_out_of_for_loop = False
-        for purchase in sales.get_user_data()[0]:
-            print(purchase)
+        for purchase in sales.get_user_data():
             if selling_id == purchase[0]:
                 break_out_of_for_loop = True
                 break
@@ -138,18 +137,27 @@ def update_transaction():
 
 def delete_transaction():
     selling_id = view.get_input("Which purchase do you want to delete?")
-    for purchase in sales.get_user_data()[0]:
-        print(purchase)
+    found = False
+    for purchase in sales.get_user_data():
         if selling_id == purchase[0]:
             sales.delete_data(selling_id)
+            print("deleting successful")
+            found = True
+    if not found:
+        print("No such id found.")
+            
 
 
 def get_biggest_revenue_transaction():
-    sales.get_biggest_revenue()
+    view.print_table([sales.get_biggest_revenue()], sales.HEADERS)
+    
 
 
 def get_biggest_revenue_product():
-    print(sales.get_max_revenue_of_all_sales_with_one_product())
+    item_pricesAdded = sales.get_max_revenue_of_all_sales_with_one_product()
+    label = item_pricesAdded[0]
+    result = item_pricesAdded[1]
+    view.print_general_results(result, label)
 
 
 def count_transactions_between():
@@ -162,7 +170,6 @@ def sum_transactions_between():
     start = input("Enter Start date (YYYY-MM-DD):")
     end = input("Enter End date (YYYY-MM-DD):")
     sales.check_in_timespan_sum_of_transactions(start, end)
-    view.print_error_message("Not implemented yet.")
 
 
 def run_operation(option):

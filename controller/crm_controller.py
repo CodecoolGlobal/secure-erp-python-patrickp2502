@@ -34,9 +34,9 @@ def update_customer():
         id = input("What is the customers id?")
         break_out_of_for_loop = False
         for customer in crm.get_user_data()[0]:
-            print(customer)
             if id == customer[0]:
                 break_out_of_for_loop = True
+                print(f"This is going to be the customer to be updated:\n",view.print_table([customer], crm.HEADERS))
                 break
         if break_out_of_for_loop:
             break

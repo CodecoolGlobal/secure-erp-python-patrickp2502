@@ -42,8 +42,12 @@ def print_general_results(result, label):
         value =  ";".join(result)
         print(f"{label}:\n {value}")
     elif isinstance(result, dict):
-        value = ";".join([f"{key}: {value}" for key, value in result])
-        print(f"{label} \n {value}")
+        value = []
+        for key in result:
+            value.append(f"{key}: {result[key]}")
+        print(label, "; ".join(value))
+    else:
+        print(print(f"{label} \n{result}"))
 
 
 
@@ -62,13 +66,17 @@ def print_table(table, header):
     """
    
     #TODO ADD VISUALS! Add flex column width
-    colum_length = max([len(data_cell) for row in table for data_cell in row]) + 4
-    
+    colum_length = max([len(data_cell) for row in table for data_cell in row]) + 4 
+    upper_header = "/" + ("-" * colum_length) * len(header) + ("-" * (len(header) - 1)) + "\\"
+    middle_header = "|" + ("-" * colum_length) * len(header) + ("-" * (len(header) - 1)) + "|"
+    lower_string = "\\" + ("-" * colum_length) * len(header) + ("-" * (len(header) - 1)) + "/"
     header_string = "|" + "|".join(["".join(header_data).center(colum_length) for header_data in header]) + "|"
-    print(header_string)
+    print(upper_header + "\n" + header_string)
     for row in table:
-        row_string = "|" + "|".join(["".join(row_data).center(colum_length) for row_data in row]) + "|"
-        print(row_string)
+        if row != "":
+            row_string = "|" + "|".join(["".join(row_data).center(colum_length) for row_data in row]) + "|"
+            print(middle_header + "\n" + row_string)
+    print(lower_string)
     
     
 
